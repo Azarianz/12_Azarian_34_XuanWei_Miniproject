@@ -96,17 +96,17 @@ public class MenuManager : MonoBehaviour
     {
         if(clicks == 1)
         {
-            SceneManager.LoadScene("Level 1");
+            SceneManager.LoadScene("Level_1");
         }
 
         if (clicks == 2)
         {
-            SceneManager.LoadScene("Level 2");
+            SceneManager.LoadScene("Level_2");
         }
 
         if (clicks == 3)
         {
-            SceneManager.LoadScene("Level 3");
+            SceneManager.LoadScene("Level_3");
         }
     }
 }
