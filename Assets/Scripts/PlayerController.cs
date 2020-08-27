@@ -40,4 +40,13 @@ public class PlayerController : MonoBehaviour
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Hazard")
+        {
+            //Lose
+            Destroy(gameObject);    //Destroy Player
+        }
+    }
 }
