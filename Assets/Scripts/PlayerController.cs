@@ -32,13 +32,41 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    IEnumerator ScaleTime(float start, float end, float time)
+    {
+        float lastTime = Time.realtimeSinceStartup;
+        float timer = 0.0f;
+
+        while (timer < time)
+        {
+            Time.timeScale = Mathf.Lerp(start, end, timer / time);
+            timer += (Time.realtimeSinceStartup - lastTime);
+            lastTime = Time.realtimeSinceStartup;
+            yield return null;
+        }
+
+        Time.timeScale = end;
+
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Win")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if(SceneManager.GetActiveScene().buildIndex != SceneManager.sceneCountInBuildSettings)
+            {
+                if (SceneManager.GetActiveScene().buildIndex + 1 == SceneManager.sceneCountInBuildSettings)
+                {
+                    WinLoseHUD.instance.Win();
+                }
+                else
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
+            }        
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -46,7 +74,11 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.tag == "Hazard")
         {
             //Lose
+            WinLoseHUD.instance.Lose();
             Destroy(gameObject);    //Destroy Player
         }
+
     }
+
+
 }

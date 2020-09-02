@@ -24,6 +24,7 @@ public class LaserScript : MonoBehaviour
             if(hit.collider.tag == "Player")
             {
                 //Lose
+                WinLoseHUD.instance.Lose();
                 Destroy(hit.collider.gameObject);   //Destroy Player
             }
         }

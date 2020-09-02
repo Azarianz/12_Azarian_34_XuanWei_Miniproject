@@ -1,26 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class WinLoseHUD : MonoBehaviour
 {
-    public GameObject pauseUI;
+    public static WinLoseHUD instance;
+
+    public GameObject winHUD;
+    public GameObject loseHUD;
+    public GameObject pauseHUD;
 
     // Start is called before the first frame update
     void Start()
     {
-        pauseUI.SetActive(false);
-
-        StartCoroutine(ScaleTime(1.0f, 1.0f, 1.0f));
+        winHUD.SetActive(false);
+        loseHUD.SetActive(false);
+        pauseHUD.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Escape))
+        if(instance == null)
         {
-            PauseGame();
+            instance = this;
+        }
+
+        else if(instance != this)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -40,29 +48,17 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = end;
 
     }
-
-    void PauseGame()
+    public void Lose()
     {
-        pauseUI.SetActive(true);
-        Cursor.visible = true;
-        StartCoroutine(ScaleTime(0.0f, 0.0f, 0.0f));
-       
+        loseHUD.SetActive(true);
+        pauseHUD.SetActive(false);
+        
     }
 
-    public void Resume()
+    public void Win()
     {
-        pauseUI.SetActive(false);
-        StartCoroutine(ScaleTime(1.0f, 1.0f, 1.0f));
+        winHUD.SetActive(true);
+        pauseHUD.SetActive(false);
+        
     }
-
-    public void ToMenu()
-    {
-        SceneManager.LoadScene("Menu");
-    }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
 }
