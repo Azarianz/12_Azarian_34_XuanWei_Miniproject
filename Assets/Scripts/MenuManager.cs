@@ -55,7 +55,7 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("Level 1");
+        SceneManager.LoadScene("Level_1");
     }
 
     public void Settings()

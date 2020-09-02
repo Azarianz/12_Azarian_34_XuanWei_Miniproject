@@ -21,7 +21,9 @@ public class RayTransport : MonoBehaviour
     {
         if(other.gameObject.tag != "Wall")
         {
-            other.gameObject.GetComponent<Rigidbody>().useGravity = false;
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            rb.useGravity = false;
+            rb.velocity = Vector3.zero;
             other.gameObject.transform.position += transform.forward * transport_speed * Time.deltaTime;
         }
     }

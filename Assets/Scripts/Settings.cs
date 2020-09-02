@@ -65,7 +65,7 @@ public class Settings : MonoBehaviour
 
     public void SetVolume(float sliderval)
     {
-        MasterChannel.SetFloat("volume", sliderval);
+        MasterChannel.SetFloat("Volume", sliderval);
     }
 
     public void SetQuality(int qualityIndex)

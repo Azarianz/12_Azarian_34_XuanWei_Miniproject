@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraControls : MonoBehaviour
 {
     public GameObject level;
+    public GameObject player;
 
     public float camrotationSpeed;
 
@@ -17,6 +18,7 @@ public class CameraControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position = player.transform.position;
         if (Input.GetKey(KeyCode.E))
         {
             level.transform.Rotate(0, -camrotationSpeed * Time.deltaTime, 0);

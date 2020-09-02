@@ -18,20 +18,20 @@ public class JumpPad : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (anim.GetBool("isActivate") == false)
         {
             //anim.SetBool("isActivate", true);
-            other.attachedRigidbody.AddForce(transform.up * 60, ForceMode.Impulse);
-            StartCoroutine("triggerJump");
+            other.attachedRigidbody.AddForce(other.gameObject.transform.up * 45, ForceMode.Impulse);
+            StartCoroutine("triggerJump");                  
         }
     }
 
     IEnumerator triggerJump()
     {
         anim.SetBool("isActivate", true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         anim.SetBool("isActivate", false);
     }
 }
